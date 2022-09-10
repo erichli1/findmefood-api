@@ -16,6 +16,7 @@ function postProcessAllFilteredResults(
   filteredResults: any[],
   params: ResultFilterParams
 ): FindMeFoodResult[] {
+  // Calculate distance in miles for all places
   const filteredResultsDistances = filteredResults.map((res) => {
     return calculateDistanceInMiles(
       Number(params.currentLat),
@@ -24,21 +25,22 @@ function postProcessAllFilteredResults(
       res.geometry.location.lng
     );
   });
+
+  // TODO: Process URL to enable passthrough to user
+
+  // Map API results to final shape for return to user
   const finalResults = filteredResults.map((item, index) => {
     const finalResult: FindMeFoodResult = {
       name: item.name,
       stars: item.rating,
       reviews: item.user_ratings_total,
       distance: filteredResultsDistances[index],
-      price_level: 0,
-      open_now: true,
+      price_level: item.price_level,
+      open_now: item.opening_hours.open_now,
       // url?: string;
     };
     return finalResult;
   });
-  // add distance
-  // process url
-  // cast to current info
   return finalResults;
 }
 

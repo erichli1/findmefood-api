@@ -8,8 +8,7 @@ export function processAllAPIResults(
   results: any[],
   params: ResultFilterParams
 ): any[] {
-  const s = params;
-  return results;
+  return filterAllResultsByPreferences(results, params);
 }
 
 /**
@@ -18,7 +17,7 @@ export function processAllAPIResults(
  * @param params interface with all filter params from user
  * @returns fully filtered list of results
  */
-function fitlerAllResultsByPreferences(
+function filterAllResultsByPreferences(
   results: any[],
   params: ResultFilterParams
 ): any[] {

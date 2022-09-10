@@ -1,6 +1,6 @@
 /** source/routes/process.ts */
 
-import { ResultFilterParams, PriceOptions } from "./types";
+import { ResultFilterParams, PriceOptions, FindMeFoodResult } from "./types";
 
 const PLACES_API_OPERATIONAL_STRING = "OPERATIONAL";
 
@@ -8,7 +8,29 @@ export function processAllAPIResults(
   results: any[],
   params: ResultFilterParams
 ): any[] {
-  return filterAllResultsByPreferences(results, params);
+  const filteredResults = filterAllResultsByPreferences(results, params);
+  return postProcessAllFilteredResults(filteredResults);
+}
+
+function postProcessAllFilteredResults(
+  filteredResults: any[],
+  params: ResultFilterParams
+): FindMeFoodResult[] {
+  const filteredResultsDistances = filteredResults.map((res) => {
+    return calculateDistanceInMiles(
+      Number(params.currentLat),
+      Number(params.currentLong),
+      res.geometry.location.lat,
+      res.geometry.location.lng
+    );
+  });
+  const finalResults = filteredResults.map((item, index) => {
+    const finalResult = "TBD";
+  });
+  // add distance
+  // process url
+  // cast to current info
+  return finalResults;
 }
 
 /**
@@ -25,12 +47,6 @@ function filterAllResultsByPreferences(
     return (
       filterByOpen(result) &&
       filterRatingsQuality(result, params.minRating, params.minNumReviews) &&
-      filterByDistance(
-        result,
-        params.maxDistance,
-        Number(params.currentLat),
-        Number(params.currentLong)
-      ) &&
       (params.maxPriceLevel !== undefined
         ? fitlerByPrice(result, params.maxPriceLevel)
         : true)

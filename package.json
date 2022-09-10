@@ -4,6 +4,7 @@
   "description": "",
   "main": "source/server.ts",
   "scripts": {
+    "start": "nodemon source/server.ts",
     "dev": "nodemon source/server.ts",
     "build": "rm -rf build/ && prettier --write source/ && tsc"
   },

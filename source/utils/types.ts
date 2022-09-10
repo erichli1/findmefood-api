@@ -1,3 +1,15 @@
+// Represents one recommendation to be passed back to the user
+export interface FindMeFoodResult {
+  name: string;
+  stars: number;
+  reviews: number;
+  distance: number;
+  price_level: number;
+  open_now?: boolean;
+  url?: string;
+}
+
+// Contains all of the user's filter preferences
 export interface ResultFilterParams {
   minRating: number;
   minNumReviews: number;
@@ -7,6 +19,7 @@ export interface ResultFilterParams {
   maxPriceLevel?: number;
 }
 
+// Used to type price options, considering Google API
 export enum PriceOptions {
   FREE = 0,
   ONE_DOLLAR_SIGN = 1,

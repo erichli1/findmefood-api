@@ -9,7 +9,7 @@ export function processAllAPIResults(
   params: ResultFilterParams
 ): any[] {
   const filteredResults = filterAllResultsByPreferences(results, params);
-  return postProcessAllFilteredResults(filteredResults);
+  return postProcessAllFilteredResults(filteredResults, params);
 }
 
 function postProcessAllFilteredResults(
@@ -25,7 +25,16 @@ function postProcessAllFilteredResults(
     );
   });
   const finalResults = filteredResults.map((item, index) => {
-    const finalResult = "TBD";
+    const finalResult: FindMeFoodResult = {
+      name: item.name,
+      stars: item.rating,
+      reviews: item.user_ratings_total,
+      distance: filteredResultsDistances[index],
+      price_level: 0,
+      open_now: true,
+      // url?: string;
+    };
+    return finalResult;
   });
   // add distance
   // process url

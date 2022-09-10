@@ -4,17 +4,24 @@ import { ResultFilterParams, PriceOptions } from "./types";
 
 const PLACES_API_OPERATIONAL_STRING = "OPERATIONAL";
 
+export function processAllAPIResults(
+  results: any[],
+  params: ResultFilterParams
+): any[] {
+  const s = params;
+  return results;
+}
+
 /**
  *
  * @param results Array of API results from Places API with all restaurant listings
  * @param params interface with all filter params from user
  * @returns fully filtered list of results
  */
-export function fitlerAllResultsByPreferences(
+function fitlerAllResultsByPreferences(
   results: any[],
   params: ResultFilterParams
 ): any[] {
-  // convert distance and add to the object
   return results.filter((result) => {
     return (
       filterByOpen(result) &&

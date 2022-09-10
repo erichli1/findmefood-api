@@ -13,7 +13,6 @@ export interface FindMeFoodResult {
 export interface ResultFilterParams {
   minRating: number;
   minNumReviews: number;
-  maxDistance: number;
   currentLat: number | string;
   currentLong: number | string;
   maxPriceLevel?: number;

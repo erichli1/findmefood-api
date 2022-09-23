@@ -64,7 +64,7 @@ const getNearbyRestaurants = async (req: Request, res: Response, next: NextFunct
 }
 
 function convertStringMilesToMeters(distanceInMiles: string) {
-    return parseInt(distanceInMiles)*1609.34
+    return parseFloat(distanceInMiles)*1609.34
 }
 
 export default { getNearbyRestaurants };

@@ -5,8 +5,8 @@ export interface FindMeFoodResult {
   reviews: number;
   distance: number;
   price_level: number;
+  place_id: string;
   open_now?: boolean;
-  url?: string;
 }
 
 // Contains all of the user's filter preferences

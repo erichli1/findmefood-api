@@ -37,7 +37,7 @@ function postProcessAllFilteredResults(
       distance: filteredResultsDistances[index],
       price_level: item.price_level,
       open_now: item.opening_hours.open_now,
-      // url?: string;
+      place_id: item.place_id,
     };
     return finalResult;
   });
@@ -59,7 +59,7 @@ function filterAllResultsByPreferences(
       filterByOpen(result) &&
       filterRatingsQuality(result, params.minRating, params.minNumReviews) &&
       (params.maxPriceLevel !== undefined
-        ? fitlerByPrice(result, params.maxPriceLevel)
+        ? filterByPrice(result, params.maxPriceLevel)
         : true)
     );
   });
@@ -121,7 +121,7 @@ const filterByOpen = (result: any): boolean => {
  * @param highestPrice int corresponding to a price level (see PriceOptions enum)
  * @returns True if restaurant/result is within the price range
  */
-const fitlerByPrice = (result: any, highestPrice: number): boolean => {
+const filterByPrice = (result: any, highestPrice: number): boolean => {
   const highestPriceValue = PriceOptions[highestPrice];
   return result.price_level <= highestPriceValue;
 };
